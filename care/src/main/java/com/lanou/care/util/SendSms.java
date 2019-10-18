@@ -1,4 +1,4 @@
-package com.lanou.springboot02.util;
+package com.lanou.care.util;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
