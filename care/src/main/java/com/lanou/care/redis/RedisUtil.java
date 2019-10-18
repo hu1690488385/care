@@ -1,4 +1,4 @@
-package com.lanou.springboot02.redis;
+package com.lanou.care.redis;
 
 import java.util.List;
 

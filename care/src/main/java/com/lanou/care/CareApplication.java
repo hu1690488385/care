@@ -1,4 +1,4 @@
-package com.lanou.springboot02;
+package com.lanou.care;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching
-public class Springboot02Application {
+public class CareApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Springboot02Application.class, args);
+        SpringApplication.run(CareApplication.class, args);
     }
 
 }
