@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
  @Autowired
  private UserMapper userMapper;
     @Override
-    public User findUser(String phone, Integer password) {
-        return userMapper.findUser(phone,password);
+    public User findUser(String phone) {
+        return userMapper.findUser(phone);
     }
 }

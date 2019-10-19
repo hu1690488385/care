@@ -1,5 +1,7 @@
 package com.lanou.care.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.lanou.care.bean.User;
 import com.lanou.care.mapper.UserMapper;
 import com.lanou.care.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("emp")
+@RequestMapping("user")
 public class UserController {
-@Autowired
+    @Autowired
     private UserService userService;
-@RequestMapping("login")
-@Cacheable("userAll")
-    public  String loginUser(HttpServletRequest request, HttpServletResponse response){
 
-    return "";
-}
+    @RequestMapping("login")
+    public String loginUser(String username, String auth) {
+        String msg = "";
+        if (username != null && !username.equals("") && auth != null && !auth.equals("")) {
+            if (true) {
+                User user = userService.findUser(username);
+                if (user != null) {
+                   msg="six";
+                } else {
+                    msg = "用户不存在";
+                }
+            }else {
+                msg="验证码不正确";
+            }
+        }
+        return JSON.toJSONString(msg);
+    }
 }
