@@ -28,7 +28,7 @@
         </div>
         <div>
             <input type="text" name="auth" class="auth" placeholder="验证码" oncontextmenu="return false" onpaste="return false" style="width:120px; float: left"  />
-            <input type="button" value="获取验证码" style="width: 150px;">
+            <input id="but" type="button" value="获取验证码" style="width: 150px;">
         </div>
         <button id="submit" type="button">登 录</button>
     </form>
@@ -50,6 +50,11 @@
                   }else {
                       alert(data)
                   }
+            },"json")
+        })
+        $("#but").click(function () {
+            $.post("user/sms",{"username":$("input[name=username]").val()},function (data) {
+
             },"json")
         })
     })

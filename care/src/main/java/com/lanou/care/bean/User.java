@@ -16,4 +16,5 @@ public class User {
     private String phone;
     private String prssword;
     private int empId;
+    private Emp emp;
 }

@@ -2,9 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>部门</title>
+    <title>用户登录</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--背景图片自动更换-->
+    <script src="js/supersized.3.2.7.min.js"></script>
+    <script src="js/supersized-init.js"></script>
+    <!--表单验证-->
+    <script src="js/jquery.validate.min.js?var1.14.0"></script>
+    <link type="text/css" href="/layui/css/layui.css" rel="stylesheet" />
+    <script>
+     $(function () {
+         $.post("user/findAll",{},function (data) {
+             $.each(data,function (index,user) {
+                 var ss=user.emp
+               var tr="<tr><td>"+user.id+"</td>"
+                   + "<td>"+user.phone+"</td>"
+                   + "<td>"+user.password+"</td>"
+                   + "<td>"+ss.ename+"</td>"
+                   + "<td><a href=''>修改</a></td>"
+                   + "<td><a href='user/deleteUser?id="+user.id+"'>删除</a></td>"
+                   + "</tr>"
+                 $("#table").append(tr)
+             })
+         },"json")
+     })
+    </script>
+    <!-- <script type="text/javascript" src="jquery.min.js"></script>-->
 </head>
 <body>
 
+<div class="login-container">
+    <h1>员工管理界面</h1>
+
+    <div class="connect">
+        <p></p>
+    </div>
+
+    <form action="" method="post" id="loginForm">
+    <table class="layui-table" id="table">
+        
+    </table>
+    </form>
+
+</div>
 </body>
 </html>
