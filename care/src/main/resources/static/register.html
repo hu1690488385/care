@@ -41,7 +41,7 @@
 			isNumber();
 		});
 		$("#submit").click(function () {
-			$.post("user/addUser");
+			$.post("user/addUser",{});
 
 		});
 		$.post("emp/findAllEmp",{},function (data) {
@@ -62,7 +62,7 @@
 	
 
 		<div>
-			<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off"
+			<input type="text" name="phone" class="phone_number" placeholder="输入手机号码" autocomplete="off"
 				   id="phone"/><br>
 			<span class="spemg" style="color: red"></span>
 		</div>
@@ -73,7 +73,7 @@
 			<span class="spe" style="color: red"></span>
 		</div>
 		<div>
-			<input type="text" name="confirm_password" class="confirm_password" placeholder="选择职位" list="emp"/>
+			<input type="text" name="empId" class="confirm_password" placeholder="选择职位" list="emp"/>
 			<datalist id="emp" class="li">
 
 			</datalist>
