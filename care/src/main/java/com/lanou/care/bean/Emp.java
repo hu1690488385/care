@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 @ToString
 @Component
 public class Emp {
-    private int emp_id;
+    private int id;
     private String ename;
 }

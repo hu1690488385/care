@@ -15,5 +15,5 @@ public class User {
     private Integer id;
     private String phone;
     private String prssword;
-    private int rmp_id;
+    private int empId;
 }
