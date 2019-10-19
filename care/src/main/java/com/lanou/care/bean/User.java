@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 public class User {
     private Integer id;
     private String phone;
-    private String prssword;
+    private String password;
     private int empId;
 }
