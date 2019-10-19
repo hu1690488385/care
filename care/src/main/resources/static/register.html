@@ -24,8 +24,23 @@
 			$(".spemg").html("");
 		}
 	}
+	function timer(time) {
+		var btn = $(".auth");
+		btn.attr("disabled", true);  //按钮禁止点击
+		btn.val(time <= 0 ? "获取" : ("" + (time) + "秒"));
+		var hander = setInterval(function() {
+			if (time <= 0) {
+				clearInterval(hander); //清除倒计时
+				btn.val("获取");
+				btn.attr("disabled", false);
+				return false;
+			}else {
+				btn.val("" + (time--) + "秒");
+			}
+		}, 1000);
+	}
 	function isNumber(){
-		var number = $(".number").value;
+		var number = $(".number").val();
 		if (number == "" || isNaN(number)){
 			$(".spe").html("验证码格式错误");
 			return false;
@@ -33,6 +48,7 @@
 			$(".spe").html("");
 		}
 	}
+
 	$(function () {
 		$(".phone_number").blur(function () {
 			checkPhone();
@@ -41,13 +57,35 @@
 			isNumber();
 		});
 		$("#submit").click(function () {
-			$.post("user/addUser",{});
+			$.post("user/addUser",{'phone':$("#phone").val(),'auth':$(".number").val(),
+				'empId':$(".esm").val()},function (data) {
+				if (data == '1'){
+					alert("添加成功");
+					window.location.href = "index.html";
+				}else{
+					alert(data);
+				}
+			},"json");
+		});
+		$(".auth").click(function () {
+			if ($("#phone").val() == ""){
+				$(".spemg").html("填写手机号");
+				return false;
+			}
+			timer(60);
+			$.post("user/getAuth",{'phone':$("#phone").val()},function (data) {
+				if (data == 'success'){
+					alert("验证码发送成功");
+				}else{
+					alert(data);
+				}
+			},"json");
 
 		});
 		$.post("emp/findAllEmp",{},function (data) {
 			$.each(data,function (index,emp) {
-				var op = "<option data_value='"+emp.id+"'>"+emp.ename+"</option>";
-				$(".li").append(op);
+				var op = "<option value='"+emp.id+"'>"+emp.ename+"</option>";
+				$(".esm").append(op);
 			})
 		},'json');
 	});
@@ -67,16 +105,16 @@
 			<span class="spemg" style="color: red"></span>
 		</div>
 		<div>
-			<input type="text" name="number" class="number" placeholder="输入验证码" oncontextmenu="return false"
-				   onpaste="return false" style="width: 203px"/>
-			<input type="button" value="获取" style="width: 62px"><br>
+			<input type="text" name="number" class="number" placeholder="输入验证码"
+				   autocomplete="off" style="width: 203px"/>
+			<input type="button" value="获取" style="width: 62px" class="auth"><br>
 			<span class="spe" style="color: red"></span>
+
 		</div>
 		<div>
-			<input type="text" name="empId" class="confirm_password" placeholder="选择职位" list="emp"/>
-			<datalist id="emp" class="li">
-
-			</datalist>
+			<select class="esm">
+				<option disabled selected hidden value="">请选择职业</option>
+			</select>
 		</div>
 		<button id="submit">注 册</button><br>
 
