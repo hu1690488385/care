@@ -3,8 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanou.care.mapper.UserMapper">
+<<<<<<< HEAD
     <insert id="addUser">
         insert into values (seq_user_id.nextval,#{u.phone},#{u.password},#{u.empId});
     </insert>
 
+=======
+<select id="findUser" resultType="User">
+    select * from users where phone=#{phone}
+</select>
+>>>>>>> 3800ab2c61b63836189d27f2be72e78273afca70
 </mapper>

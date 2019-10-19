@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("emp")
 public class EmpController {
+<<<<<<< HEAD
     @Autowired
     private EmpService empService;
     @RequestMapping("findAllEmp")
@@ -19,4 +20,7 @@ public class EmpController {
         List<Emp> empList = empService.findAllEmp();
         return JSON.toJSONString(empList);
     }
+=======
+
+>>>>>>> 3800ab2c61b63836189d27f2be72e78273afca70
 }
