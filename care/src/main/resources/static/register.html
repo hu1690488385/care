@@ -24,6 +24,21 @@
 			$(".spemg").html("");
 		}
 	}
+	function timer(time) {
+		var btn = $(".auth");
+		btn.attr("disabled", true);  //按钮禁止点击
+		btn.val(time <= 0 ? "获取" : ("" + (time) + "秒"));
+		var hander = setInterval(function() {
+			if (time <= 0) {
+				clearInterval(hander); //清除倒计时
+				btn.val("获取");
+				btn.attr("disabled", false);
+				return false;
+			}else {
+				btn.val("" + (time--) + "秒");
+			}
+		}, 1000);
+	}
 	function isNumber(){
 		var number = $(".number").val();
 		if (number == "" || isNaN(number)){
@@ -53,6 +68,11 @@
 			},"json");
 		});
 		$(".auth").click(function () {
+			if ($("#phone").val() == ""){
+				$(".spemg").html("填写手机号");
+				return false;
+			}
+			timer(60);
 			$.post("user/getAuth",{'phone':$("#phone").val()},function (data) {
 				if (data == 'success'){
 					alert("验证码发送成功");
