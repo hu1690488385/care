@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css"/>
     <script src="js/jquery.min.js"></script>
     <script src="js/common.js"></script>
     <!--背景图片自动更换-->
@@ -11,23 +11,31 @@
     <script src="js/supersized-init.js"></script>
     <!--表单验证-->
     <script src="js/jquery.validate.min.js?var1.14.0"></script>
-    <link type="text/css" href="/layui/css/layui.css" rel="stylesheet" />
+    <link type="text/css" href="/layui/css/layui.css" rel="stylesheet"/>
     <script>
-     $(function () {
-         $.post("user/findAll",{},function (data) {
-             $.each(data,function (index,user) {
-                 var ss=user.emp
-               var tr="<tr><td>"+user.id+"</td>"
-                   + "<td>"+user.phone+"</td>"
-                   + "<td>"+user.password+"</td>"
-                   + "<td>"+ss.ename+"</td>"
-                   + "<td><a href=''>修改</a></td>"
-                   + "<td><a href='user/deleteUser?id="+user.id+"'>删除</a></td>"
-                   + "</tr>"
-                 $("#table").append(tr)
-             })
-         },"json")
-     })
+        $(function () {
+            $.post("user/findAll", {}, function (data) {
+                var aa = "<tr><th>" + '编号' + "</th>"
+                    + "<th>" + '手机号' + "</th>"
+                    + "<th>" + '密码' +"</th>"
+                    + "<th>" + '职位' +"</th>"
+                    + "<th>" + '修改信息' +"</th>"
+                    + "<th>" + '删除用户' +"</th>"
+                    + "</tr>"
+                $("#table").append(aa);
+                $.each(data, function (index, user) {
+                    var ss = user.emp
+                    var tr = "<tr><td>" + user.id + "</td>"
+                        + "<td>" + user.phone + "</td>"
+                        + "<td>" + user.password + "</td>"
+                        + "<td>" + ss.ename + "</td>"
+                        + "<td><a href='update.html?phone=" + user.phone + "'>修改</a></td>"
+                        + "<td><a href='user/deleteUser?id=" + user.id + "'>删除</a></td>"
+                        + "</tr>"
+                    $("#table").append(tr)
+                })
+            }, "json")
+        })
     </script>
     <!-- <script type="text/javascript" src="jquery.min.js"></script>-->
 </head>
@@ -39,13 +47,12 @@
     <div class="connect">
         <p></p>
     </div>
-
-    <form action="" method="post" id="loginForm">
-    <table class="layui-table" id="table">
-        
-    </table>
-    </form>
-
+    <div style="width: 26%; margin: 0 auto;" >
+        <form action="" method="post" id="loginForm">
+            <table class="layui-table" id="table">
+            </table>
+        </form>
+    </div>
 </div>
 </body>
 </html>

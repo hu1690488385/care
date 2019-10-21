@@ -15,4 +15,15 @@ public class EmpServiceImpl implements EmpService {
     public List<Emp> findAllEmp() {
         return empMapper.findAllEmp();
     }
+
+    @Override
+    public int updateEmp(String ename, Integer id) {
+        return empMapper.updateEmp(ename,id);
+    }
+
+    @Override
+    public Emp findEmp(Integer id) {
+        return empMapper.findEmp(id);
+    }
+
 }
