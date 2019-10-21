@@ -71,7 +71,7 @@
 			if ($("#phone").val() == ""){
 				$(".spemg").html("填写手机号");
 				return false;
-			}
+			};
 			timer(60);
 			$.post("user/getAuth",{'phone':$("#phone").val()},function (data) {
 				if (data == 'success'){
