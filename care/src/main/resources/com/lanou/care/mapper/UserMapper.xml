@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanou.care.mapper.UserMapper">
     <insert id="addUser">
-<<<<<<< HEAD
         insert into values (seq_user_id.nextval,#{u.phone},#{u.password},#{u.empId})
     </insert>
 
@@ -21,12 +20,7 @@
     <delete id="deleteUser">
         delete from users where id=#{id}
     </delete>
-=======
-        insert into users values (seq_user_id.nextval,#{u.phone},#{u.password},#{u.empId})
-    </insert>
-
-<select id="findUser" resultType="User">
-    select * from users where phone=#{phone}
-</select>
->>>>>>> 49f99ccec38c55098eeb8f2a0f8e7447fac7aa8a
+    <update id="updateUser">
+        update users set password=#{password},empid=#{emp_id} where id=#{id}
+    </update>
 </mapper>

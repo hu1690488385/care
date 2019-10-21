@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>用户注册</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--背景图片自动更换-->
+    <script src="js/supersized.3.2.7.min.js"></script>
+    <script src="js/supersized-init.js"></script>
+    <!--表单验证-->
+    <script src="js/jquery.validate.min.js?var1.14.0"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(function () {
+    $.post("emp/findAllEmp",{},function (data) {
+        $.each(data,function (index,emp) {
+            var op = "<option value='"+emp.id+"'>"+emp.ename+"</option>";
+            $(".esm").append(op);
+        })
+
+    },'json')
+        $.post("user/updateUser",{"id":id},function (data) {
+            console.log(data)
+        },"json")
+        $(".auth").click(function () {
+            if ($("#phone").val() == ""){
+                $(".spemg").html("填写手机号");
+                return false;
+            }
+            timer(60);
+            $.post("user/getAuth",{'phone':$("#phone").val()},function (data) {
+                if (data == 'success'){
+                    alert("验证码发送成功");
+                }else{
+                    alert(data);
+                }
+            },"json");
+
+        });
+        function timer(time) {
+            var btn = $(".auth");
+            btn.attr("disabled", true);  //按钮禁止点击
+            btn.val(time <= 0 ? "获取" : ("" + (time) + "秒"));
+            var hander = setInterval(function() {
+                if (time <= 0) {
+                    clearInterval(hander); //清除倒计时
+                    btn.val("获取");
+                    btn.attr("disabled", false);
+                    return false;
+                }else {
+                    btn.val("" + (time--) + "秒");
+                }
+            }, 1000);
+        }
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+        var id = GetQueryString("phone");
+
+    })
+</script>
+
+<div class="register-container">
+    <h1>修改信息</h1>
+
+    <div class="connect">
+        <p>Link the world. Share to world.</p>
+    </div>
+    <div>
+        <input type="password" name="password" class="phone_number" placeholder="输入密码" autocomplete="off"
+               id="phone"/><br>
+        <span class="spemg" style="color: red"></span>
+    </div>
+    <div>
+        <input type="text" name="number" class="number" placeholder="输入验证码"
+               autocomplete="off" style="width: 203px"/>
+        <input type="button" value="获取" style="width: 62px" class="auth"><br>
+        <span class="spe" style="color: red"></span>
+
+    </div>
+    <div>
+        <select class="esm">
+            <option disabled selected hidden value="">请选择职业</option>
+        </select>
+    </div>
+    <button id="submit">保  存</button><br>
+
+    <a href="emp.html">
+        <button type="button" class="register-tis">返回</button>
+    </a>
+</div>
+</body>
+</html>

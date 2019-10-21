@@ -6,5 +6,10 @@
     <select id="findAllEmp" resultType="Emp">
         select id,ename from emp
     </select>
-
+    <update id="updateEmp">
+        update emp set ename=#{ename} where id=#{id}
+    </update>
+    <select id="findEmp" resultType="emp">
+        select id,ename from emp where id=#{id}
+    </select>
 </mapper>

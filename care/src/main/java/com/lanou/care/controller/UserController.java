@@ -1,61 +1,29 @@
 package com.lanou.care.controller;
-<<<<<<< HEAD
-import com.aliyuncs.CommonRequest;
-import com.aliyuncs.CommonResponse;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.exceptions.ServerException;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
-=======
-
->>>>>>> 49f99ccec38c55098eeb8f2a0f8e7447fac7aa8a
+import com.lanou.care.bean.Emp;
 import com.lanou.care.bean.User;
+import com.lanou.care.service.EmpService;
 import com.lanou.care.service.UserService;
 import com.lanou.care.util.SendSms;
 import com.lanou.care.util.StringRandom;
-import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSON;
-<<<<<<< HEAD
-import com.lanou.care.bean.User;
-import com.lanou.care.mapper.UserMapper;
-import com.lanou.care.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-=======
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
->>>>>>> 49f99ccec38c55098eeb8f2a0f8e7447fac7aa8a
 @RestController
 @RequestMapping("user")
 public class UserController {
     @Autowired
     private UserService userService;
-<<<<<<< HEAD
-
     @Autowired
     private StringRandom random;
-
-    @RequestMapping("addUser")
-    public String adduser(User user) {
-        user.setPrssword(random.getStringRandom(8));
-        int i = userService.addUser(user);
-        return "";
-    }
-
-=======
     @Autowired
-    private StringRandom random;
+    private EmpService empService;
     @Autowired
     private User user;
     @Autowired
@@ -89,12 +57,11 @@ public class UserController {
         /* String bbc = sendSms.getAuth(phone,getAuth);*/
          return JSON.toJSONString(getAuth);
     }
->>>>>>> 49f99ccec38c55098eeb8f2a0f8e7447fac7aa8a
     @RequestMapping("login")
     public String loginUser(String username, String auth) {
         String msg = "";
         if (username != null && !username.equals("") && auth != null && !auth.equals("")) {
-            if (true) {
+            if (auth.equals(getAuth)) {
                 User user = userService.findUser(username);
                 if (user != null) {
 
@@ -119,30 +86,14 @@ public class UserController {
         int aa= userService.deleteUser(Integer.parseInt(id));
         return "emp.html";
     }
-   /* @RequestMapping("sms")
-    public String SMS(String username) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "<accessKeyId>", "<accessSecret>");
-        IAcsClient client = new DefaultAcsClient(profile);
-
-        CommonRequest request = new CommonRequest();
-        request.setMethod(MethodType.POST);
-        request.setDomain("dysmsapi.aliyuncs.com");
-        request.setVersion("2017-05-25");
-        request.setAction("SendSms");
-        request.putQueryParameter("RegionId", "cn-hangzhou");
-        request.putQueryParameter("PhoneNumbers", username);
-        request.putQueryParameter("SignName", "王者荣耀开发部");
-        request.putQueryParameter("TemplateCode", "SMS_175532071");
-        request.putQueryParameter("TemplateParam", "{\"code\":\"+"+random.getAuth()+"}");
-        try {
-            CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
-        } catch (ServerException e) {
-            e.printStackTrace();
-        } catch (ClientException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }*/
+    @RequestMapping("updateUser")
+    public String updateUser(String id){
+        Map map = new HashMap();
+        User user=userService.findUser(id);
+        List<Emp> emps = empService.findAllEmp();
+        map.put("user",user);
+        map.put("emps",emps);
+        return JSON.toJSONString(map);
+    }
 }
 
