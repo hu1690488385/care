@@ -6,10 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
-
->>>>>>> 89f04230deac7cee8f8485c880754967ec2dc8d5
 @Mapper
 @Component
 public interface EmpMapper {

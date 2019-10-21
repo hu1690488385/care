@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-<<<<<<< HEAD
     public User passLogin(String phone, String pass) {
         return userMapper.passLogin(phone, pass);
     }
@@ -43,10 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int addUser(User user) {
         return userMapper.addUser(user);
-=======
-    public int addUser(User user) {
-        return userMapper.addUser(user);
-
->>>>>>> 89f04230deac7cee8f8485c880754967ec2dc8d5
     }
+
+
 }

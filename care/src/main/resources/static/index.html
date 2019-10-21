@@ -26,7 +26,6 @@
         <div>
             <input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
         </div>
-<<<<<<< HEAD
         <div class="div1">
             <input type="text" name="auth" class="auth" placeholder="验证码" oncontextmenu="return false"
                    onpaste="return false" style="width:203px; float: left"  />
@@ -35,13 +34,7 @@
         <div class="div2" style="display: none">
             <input type="password" name="password" class="password" placeholder="输入密码" oncontextmenu="return false"
                    onpaste="return false"/>
-=======
-        <div>
-            <input type="text" name="auth" class="auth" placeholder="验证码" oncontextmenu="return false" onpaste="return false" style="width:120px; float: left"  />
-            <input id="but" type="button" value="获取验证码" class="but" style="width: 150px;">
->>>>>>> 89f04230deac7cee8f8485c880754967ec2dc8d5
         </div>
-
         <button id="submit" type="button">登 录</button>
         <button id="submit2" type="button" style="display: none">登 录</button>
         <button id="huan" type="button" value="1">账户密码登录</button>
@@ -54,74 +47,74 @@
 
 
 </body>
-<script>
+<script type="text/javascript">
     $(function () {
         $("#submit").click(function () {
-            $.post("user/login",{"username":$("input[name=username]").val(),"auth":$("input[name=auth]").val()},function (data) {
-                  if (data == 'six'){
-                      window.location.href=("emp.html");
-                  }else {
-                      alert(data)
-                  }
-            },"json")
+            $.post("user/login", {
+                "username": $("input[name=username]").val(),
+                "auth": $("input[name=auth]").val()
+            }, function (data) {
+                if (data == 'six') {
+                    window.location.href = ("emp.html");
+                } else {
+                    alert(data)
+                }
+            }, "json")
         })
+
         function timer(time) {
             var btn = $("#but");
             btn.attr("disabled", true);  //按钮禁止点击
             btn.val(time <= 0 ? "获取" : ("" + (time) + "秒"));
-            var hander = setInterval(function() {
+            var hander = setInterval(function () {
                 if (time <= 0) {
                     clearInterval(hander); //清除倒计时
                     btn.val("获取");
                     btn.attr("disabled", false);
                     return false;
-                }else {
+                } else {
                     btn.val("" + (time--) + "秒");
                 }
             }, 1000);
         }
+
         $("#but").click(function () {
-           timer(60);
-            $.post("user/getAuth",{'username':$("#usernmae").val()},function (data) {
-                if (data == 'success'){
+            timer(60);
+            $.post("user/getAuth", {'username': $("#usernmae").val()}, function (data) {
+                if (data == 'success') {
                     alert("验证码发送成功");
-                }else{
+                } else {
                     alert(data);
                 }
-            },"json");
+            }, "json");
 
-<<<<<<< HEAD
-            },"json")
         });
         $("#huan").click(function () {
-            $("#huan").css("display","none");
+            $("#huan").css("display", "none");
             $("#huan2").removeAttr("style");
-            $("#submit").css("display","none");
+            $("#submit").css("display", "none");
             $("#submit2").removeAttr("style");
-            $(".div1").css("display","none");
+            $(".div1").css("display", "none");
             $(".div2").removeAttr("style");
         });
         $("#huan2").click(function () {
-            $("#huan2").css("display","none");
+            $("#huan2").css("display", "none");
             $("#huan").removeAttr("style");
-            $("#submit2").css("display","none");
+            $("#submit2").css("display", "none");
             $("#submit").removeAttr("style");
-            $(".div2").css("display","none");
+            $(".div2").css("display", "none");
             $(".div1").removeAttr("style");
         });
         $("#submit2").click(function () {
-        $.post("user/passlogin",{"phone":$(".username").val(),"pass":$(".password").val()},
-        function (data) {
-          if (data == "six"){
-              window.location.href="emp.html";
-          }else {
-              alert(data)
-          }
-        },"json");
+            $.post("user/passlogin", {"phone": $(".username").val(), "pass": $(".password").val()},
+                function (data) {
+                    if (data == "six") {
+                        window.location.href = "emp.html";
+                    } else {
+                        alert(data)
+                    }
+                }, "json");
         })
-=======
-        });
->>>>>>> 89f04230deac7cee8f8485c880754967ec2dc8d5
-    })
+    });
 </script>
 </html>

@@ -12,9 +12,6 @@ public interface UserService {
     public List<User> findAll();
     public int updateUser(String password,Integer empid,Integer id);
     public int deleteUser(Integer id);
-<<<<<<< HEAD
     //手机号密码登录
     public User passLogin(String phone,String pass);
-=======
->>>>>>> 89f04230deac7cee8f8485c880754967ec2dc8d5
 }
